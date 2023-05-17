@@ -1,0 +1,140 @@
+c Pt分子の座標(x,y,z方向)
+      common / posit_pt / posx_pt(nkoss_pt),posy_pt(nkoss_pt),
+     &   posz_pt(nkoss_pt)
+c Ar分子の座標(x,y,z方向)
+      common / posit_ar / posx_ar(nkoss_ar),posy_ar(nkoss_ar),
+     &   posz_ar(nkoss_ar)
+c Pt各分子の速度(x,y,z方向)
+      common / veloc_pt / velx_pt(nkoss_pt),vely_pt(nkoss_pt),
+     &   velz_pt(nkoss_pt)
+c Ar各分子の速度(x,y,z方向)
+      common / veloc_ar / velx_ar(nkoss_ar),vely_ar(nkoss_ar),
+     &   velz_ar(nkoss_ar)
+	  
+	  common / veloc3 / vx_pt(nkoss_pt),vy_pt(nkoss_pt),
+     &   vz_pt(nkoss_pt)
+c Pt各分子に働く力（x,y,z方向）
+      common /force_pt/ forx_pt(nkoss_pt), fory_pt(nkoss_pt),
+     &   forz_pt(nkoss_pt)
+c Ar各分子に働く力（x,y,z方向）
+      common /force_ar/ forx_ar(nkoss_ar), fory_ar(nkoss_ar),
+     &   forz_ar(nkoss_ar)
+c ランジュバン法における力
+      common / force_langevin / flanx(nkoss_pt),flany(nkoss_pt),
+     &   flanz(nkoss_pt)
+	 
+c ひとつ前の時刻での粒子の位置
+	  common /p_bef_ar/ p_bx_ar(nkoss_ar),p_by_ar(nkoss_ar),
+     &   p_bz_ar(nkoss_ar)
+
+c Pt各分子のポテンシャルエネルギー,運動エネルギー
+      common / energy_pt / poten_pt(nkoss_pt), ukine_pt(nkoss_pt)
+c Ar各分子のポテンシャルエネルギー,運動エネルギー
+      common / energy_ar / poten_ar(nkoss_ar), ukine_ar(nkoss_ar)
+c Ar同士の分子のポテンシャルエネルギー,運動エネルギー
+      common / energy3 / poten3(nkoss_ar), ukine3(nkoss_ar)
+	  
+c 分子の質量
+      common / mass / zmass_pt, zmass_ar
+c 力の計算係数 
+      common / cforce / cforce1, cforce2, cforce3_bot, cforce3_top
+
+c Pt-Pt間の分子のLennard-Jonesパラメータ
+      common / sigeps1 / sig1, eps1
+c Ar-Ar間の分子のLennard-Jonesパラメータ
+      common / sigeps2 / sig2, eps2
+c Ar-Pt間の分子のLennard-Jonesパラメータ
+      common / sigeps3 / sig3, eps3_bot, eps3_top
+c Pt-Pt間のポテンシャルカットオフ長さx,y,z方向
+      common / cutof1 / xcutof1, ycutof1, zcutof1
+c Ar-Ar間のポテンシャルカットオフ長さx,y,z方向
+      common / cutof2 / xcutof2, ycutof2, zcutof2
+c Ar-Pt間のポテンシャルカットオフ長さx,y,z方向
+      common / cutof3 / xcutof3, ycutof3, zcutof3
+	  
+c 現在のステップ数
+      common / steps / nowstp
+c 計算開始からの時間[ns]
+      common / time / time_r,tnowtime
+c x,y,z方向の周期長さ
+	  
+c 粒子登録法　np1,2,3: 相互作用している粒子のペアの数(1=Pt,2=Ar, 3=異分子間)
+c np11,12,21,22,31,32: 相互作用している粒子の番号(前番号が粒子の種類の関係性(上と同じ),後番号は2つの粒子を格納するために1,2とつけている)
+      common / pair1 / np1, np11(nkoss_pt*nkoss_pt/2),
+     &  np12(nkoss_pt*nkoss_pt/2)
+      common / pair2 / np2, np21(nkoss_ar*nkoss_ar/2),
+     &  np22(nkoss_ar*nkoss_ar/2)
+      common / pair3 / np3, np31(nkoss_pt*nkoss_ar), 
+     &   np32(nkoss_pt*nkoss_ar)
+	  
+c 各粒子の最大速度(1=Pt,2=Ar)
+      common / vmax / vmax_pt, vmax_ar
+c 乱数
+      common / ransu / iransu
+c マクスウェル分布算出
+      common / count / ncount(nmaxwell)
+c Ar領域内
+      common / ar_length / underz_ar,topz_ar,z_ar
+c スラブ内のArの個数,スラブの体積
+      common / slab / ncountd_ar(ndzd),ncount_ar(ndzt),slab_v,dzd,dzt
+c スラブの幅
+      common / dz / dz(ndzd)
+c スラブ内のPtの個数
+      common / slab_pt / ncount_pt(ndzd)
+c 温度分布
+      common / temp / temp_ar_slab(ndzt),totkin_ar_slab(ndzt)
+c z方向の密度分布
+      common / dens_z / zdensi(ndzd),zdensi_pt(ndzd)
+c 分布の加算
+      common / kasan / tot_temp_ar(ndzt),tot_zdensi(ndzd),
+     &                  tot_zdensi_pt(ndzd),d,z_d
+c 2次元密度分布パラメータ
+      common / dens_2d_parate / slab_2d_v,dxx,dzz
+      common / dens_2d_mesh / n_dens(ndx,ndz), n_dens_tot(ndx,ndz),
+     &                  dens_2d(ndx,ndz),x_2d(ndx),z_2d(ndz)	 
+	 
+c 各層の温度
+      common / temp_pt_bot / temp_pt_bot2,temp_pt_bot3,temp_pt_bot4,
+     &          temp_pt_bot5,temp_pt_bot6,temp_pt_bot7,temp_pt_bot8
+     &          temp_pt_bot9,temp_pt_bot10,temp_pt_bot11,temp_pt_bot12	 
+	  common / temp_pt_top / temp_pt_top2,temp_pt_top3,temp_pt_top4
+	  common / pos_temp_bot/ pt_bot2,pt_bot3,pt_bot4,pt_bot5,pt_bot6,
+     &                        pt_bot7,pt_bot8,pt_bot9,pt_bot10,
+     &                        pt_bot11,pt_bot12
+	  common / pos_temp_top/ pt_top2,pt_top3,pt_top4
+	  
+c 各層の温度の時間平均
+      common / tot_bot / tot_bot2,tot_bot3,tot_bot4,tot_bot5,
+     &                   tot_bot6,tot_bot7,tot_bot8,tot_bot9,
+     &                   tot_bot10,tot_bot11,tot_bot12
+	  common / tot_top / tot_top2,tot_top3,tot_top4
+c 上壁面に与える力の時間平均
+      common / forcetop / fave_top_x,fave_top_y,fave_top_z
+c 下壁面に与える力の時間平均
+      common / foecebot / fave_bot_x,fave_bot_y,fave_bot_z
+c　上壁面に与える力（x,y,z方向）
+      common /forcewall/ forw_top_x, forw_top_y, forw_top_z
+c　下壁面に与える力（x,y,z方向）
+      common /forcewall/ forw_bot_x, forw_bot_y, forw_bot_z 
+c 圧力加算
+      common / fff/ fff,tot_fff,tot_fave_top_z,tot_fave_bot_z
+
+ccccc熱流束の計算ccccccccccccc
+
+      common / f_q / force_qx(nkoss_pt),force_qy(nkoss_pt),
+     &                force_qz(nkoss_pt)
+      common / heat1 / qx_pt(nkoss_pt),qy_pt(nkoss_pt),qz_pt(nkoss_pt)
+	  common / heat5 / qqx_pt(nkoss_pt),qqy_pt(nkoss_pt),
+     &                 qqz_pt(nkoss_pt)
+      common / heat2 / q_pt(nkoss_pt)
+      common / heat3 / qx_bot,qy_bot,qz_bot,q_bot,tot_q_bot
+      common / heat4 / qx_top,qy_top,qz_top,q_top,tot_q_top
+	  common / heat6 / velx_lan(nkoss_pt),vely_lan(nkoss_pt),
+     &                 velz_lan(nkoss_pt)
+	  common /heat_lange / qx_bot_L,qy_bot_L,qz_bot_L,q_bot_L
+	  common / heat_lange_top / qx_top_L,qy_top_L,qz_top_L,q_top_L
+      common /heat_lange/ q_bot_phantom,q_top_phantom
+	  
+cccccDDLの計算cccccccccccccccc
+      common / dens_balk / dens_ar
+	  common / calcuddl / ddl

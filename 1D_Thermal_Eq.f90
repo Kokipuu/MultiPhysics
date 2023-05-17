@@ -1,11 +1,11 @@
 module constants
-    implicit none
-    integer::i,nt
-    integer, parameter :: imax = 100,ntmax = 2500
-    real(8):: T(0:imax),xmax,x,dx,dt,kp
-    integer,parameter :: SP = kind(1.0)
-    integer,parameter :: DP = selected_real_kind(2*precision(1.0_SP))
-  end module constants
+   implicit none
+   integer::i,nt
+   integer, parameter :: imax = 100,ntmax = 2500
+   real(8):: T(0:imax),xmax,x,dx,dt,kp
+   integer,parameter :: SP = kind(1.0)
+   integer,parameter :: DP = selected_real_kind(2*precision(1.0_SP))
+end module constants
    
   module print
     use constants
