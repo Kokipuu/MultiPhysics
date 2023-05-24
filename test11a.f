@@ -7,8 +7,8 @@ c      必要ファイル:parate.dat，random0.dat,random1.dat
 c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c　倍精度計算の宣言
-        implicit double precision(a-h,o-z)
-		implicit integer(n)
+      implicit double precision(a-h,o-z)
+      implicit integer(n)
 ************************************************************************
 c パラメータファイルparate.datを読み込む
       include 'inc/parameter8a.dat'
@@ -21,42 +21,41 @@ c 読み込み用乱数ファイル
       open(1,file='inc/random1.dat')
       open(2,file='inc/random0.dat')
 ! 各分子の位置データの出力
-	  open(3,file='result/flat_a4/test11a/posit_pt9.dat')
-	  open(4,file='result/flat_a4/test11a/posit_ar9.dat')
+      open(3,file='result/flat_a4/test11a/posit_pt9.dat')
+      open(4,file='result/flat_a4/test11a/posit_ar9.dat')
 !　各分子の速度データの出力
-	  open(5,file='result/flat_a4/test11a/veloc_pt9.dat')
-	  open(6,file='result/flat_a4/test11a/veloc_ar9.dat')
+      open(5,file='result/flat_a4/test11a/veloc_pt9.dat')
+      open(6,file='result/flat_a4/test11a/veloc_ar9.dat')
 ! 各分子のエネルギーデータの出力
-	  open(7,file='result/flat_a4/test11a/energy_pt9.dat')
-	  open(8,file='result/flat_a4/test11a/energy_ar9.dat')
-	  open(9,file='result/flat_a4/test11a/total energy9.dat')
+      open(7,file='result/flat_a4/test11a/energy_pt9.dat')
+      open(8,file='result/flat_a4/test11a/energy_ar9.dat')
+      open(9,file='result/flat_a4/test11a/total energy9.dat')
 ! 各分子の最終的な位置データの出力
-	  open(10,file='result/flat_a4/test11a/pos_vel9.dat')
+      open(10,file='result/flat_a4/test11a/pos_vel9.dat')
 ! 全粒子の最大速度の出力
-	  open(12,file='result/flat_a4/test11a/max_velocity9.dat')
+      open(12,file='result/flat_a4/test11a/max_velocity9.dat')
 ! 系の周期長さ
-	  open(13,file='result/flat_a4/test11a/syuuki9.dat')
+      open(13,file='result/flat_a4/test11a/syuuki9.dat')
 ! Ptの層ごとの温度データ
-
       open(42,file='result/flat_a4/test11a/temp_pt_bot9.dat')
-	  open(43,file='result/flat_a4/test11a/temp_pt_top9.dat')
+      open(43,file='result/flat_a4/test11a/temp_pt_top9.dat')
 ! Arの温度データ
-	  open(14,file='result/flat_a4/test11a/temp_ar9.dat')
+      open(14,file='result/flat_a4/test11a/temp_ar9.dat')
 ! Maxwell分布データ
       open(20,file='result/flat_a4/test11a/maxwell9.dat')
 	  
 ! 分布の出力
       open(40,file='result/flat_a4/test11a/temp_bunpu9.dat')
       open(41,file='result/flat_a4/test11a/dens_bunpu9.dat')
-	  open(32,file='result/flat_a4/test11a/count9.dat')
+      open(32,file='result/flat_a4/test11a/count9.dat')
 	  
 ! 圧力の測定  
       open(31,file='result/flat_a4/test11a/pressure9.dat')
-	  open(33,file='result/flat_a4/test11a/ave_pressure9.dat')
+      open(33,file='result/flat_a4/test11a/ave_pressure9.dat')
 ! 熱流束の計算
       open(50,file='result/flat_a4/test11a/heatflux_interface.dat')
-	  open(51,file='result/flat_a4/test11a/heatflux_langevin.dat')
-	  open(500,file='result/flat_a4/test11a/heatflux_test.dat')
+      open(51,file='result/flat_a4/test11a/heatflux_langevin.dat')
+      open(500,file='result/flat_a4/test11a/heatflux_test.dat')
 	  
 ! DDLの計算
       open(60,file='result/flat_a4/test11a/DDL.dat')
@@ -65,29 +64,29 @@ c 読み込み用乱数ファイル
 ! pvch用のファイル
       open(16,file='animation/flat_a4/test11a/color.dat')
       open(17,file='animation/flat_a4/test11a/pos.dat')
-	  open(18,file='animation/flat_a4/test11a/mask.dat')
-	  open(19,file='animation/flat_a4/test11a/ball.dat')
+      open(18,file='animation/flat_a4/test11a/mask.dat')
+      open(19,file='animation/flat_a4/test11a/ball.dat')
 
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-          nowstp=0
-		  iransu = 9999
-		  ncount=0
-		  ncount_pt=0
-		  ncountd = 0
-		  tot_temp_ar = 0
-		  tot_zdensi = 0
-		  tot_zdensi_pt=0
-		  tot_q_bot=0
-		  tot_q_top=0
-		  q_bot_L=0
-		  q_top_L=0
-		  ddl=0
-		  pt_bot2=0
-		  pt_bot3=0
-		  pt_bot4=0
-		  pt_top2=0
-		  pt_top3=0
-		  pt_top4=0
+      nowstp=0
+      iransu = 9999
+      ncount=0
+      ncount_pt=0
+      ncountd = 0
+      tot_temp_ar = 0
+      tot_zdensi = 0
+      tot_zdensi_pt=0
+      tot_q_bot=0
+      tot_q_top=0
+      q_bot_L=0
+      q_top_L=0
+      ddl=0
+      pt_bot2=0
+      pt_bot3=0
+      pt_bot4=0
+      pt_top2=0
+      pt_top3=0
+      pt_top4=0
 !		  tot_bot2 = 0
 !		  tot_bot3 = 0
 !		  tot_bot4 = 0
@@ -95,11 +94,11 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 !		  tot_top3 = 0
 !		  tot_top4 = 0
 c 各分子の初期位置，初期速度などの設定
-          call seting
+      call seting
 !		  write(*,*)xsyu10,ysyu10,zsyu10
 c 系内の全分子の並進速度の補正
-          call cortra1
-          call cortra2
+      call cortra1
+      call cortra2
 c 系内の全分子の温度の補正
           call scale2
           call langevin
