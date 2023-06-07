@@ -287,8 +287,8 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc!Pt粒子
 
 ccccccccccccccccccccccccccccccccccccccccccccccccccccc!ナノ構造
       do 500 k=1,n1x_pt
-      if(k.ge.4)then
-        if(k.le.8)then
+      if(k.ge.3)then
+        if(k.le.10)then
           x = underx+dble(k-1)*stdist/2.0D0
           do 501 i=1,nnz_pt
             z = upz + dble(i-1)*stdist/2.0D0
@@ -309,40 +309,40 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccc!ナノ構造
               num = num+1
               posx_pt(num) = x
               posy_pt(num) = y
-                posz_pt(num) = z
+              posz_pt(num) = z
 502           continue
       write(210,'(2e15.7)')posz_pt(num)
 501         continue
         endif
       endif
 
-      if(k.ge.14)then
-        if(k.le.18)then
-          x = underx+dble(k-1)*stdist/2.0D0
-          do 505 i=1,nnz_pt
-            z = upz + dble(i-1)*stdist/2.0D0
-            do 506 j=1,nny_pt
-              if(mod(k,2).eq.0)then
-                if(mod(i,2).eq.0)then
-                  y = undery + dble(j-1)*stdist
-                else
-                  y = undery + dble(j-1)*stdist + stdist/2.0D0
-                endif
-              else
-                if(mod(i,2) .eq. 0) then
-                  y = undery + dble(j-1)*stdist + stdist/2.0D0
-                else
-                  y = undery + dble(j-1)*stdist
-                endif
-              endif    
-              num = num+1
-              posx_pt(num) = x
-              posy_pt(num) = y
-              posz_pt(num) = z
-506           continue
-505         continue
-        endif
-      endif
+!       if(k.ge.14)then
+!         if(k.le.18)then
+!           x = underx+dble(k-1)*stdist/2.0D0
+!           do 505 i=1,nnz_pt
+!             z = upz + dble(i-1)*stdist/2.0D0
+!             do 506 j=1,nny_pt
+!               if(mod(k,2).eq.0)then
+!                 if(mod(i,2).eq.0)then
+!                   y = undery + dble(j-1)*stdist
+!                 else
+!                   y = undery + dble(j-1)*stdist + stdist/2.0D0
+!                 endif
+!               else
+!                 if(mod(i,2) .eq. 0) then
+!                   y = undery + dble(j-1)*stdist + stdist/2.0D0
+!                 else
+!                   y = undery + dble(j-1)*stdist
+!                 endif
+!               endif    
+!               num = num+1
+!               posx_pt(num) = x
+!               posy_pt(num) = y
+!               posz_pt(num) = z
+! 506           continue
+! 505         continue
+!         endif
+!       endif
 500   continue
 
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc!Pt粒子並べる処理(上の平板)
@@ -842,7 +842,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       if(dit2.lt.bkr2)then
         np3 =np3+1
         np31(np3) = i
-        np32(np3) = j	
+        np32(np3) = j
       endif
 907       continue
 906     continue

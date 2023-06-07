@@ -14,16 +14,16 @@
 ! nny_pt: ナノ構造部分のy方向に並べるPt粒子の個数
 ! nnz_pt: ナノ構造部分のz方向に並べるPt粒子の個数
 
-     &  n1x_pt = 20, n1y_pt = 10, n1z_pt = 4,
-     &  n2x_pt = 20, n2y_pt = 10, n2z_pt = 4,
-     &  nnx_pt = 5, nny_pt = 10, nnz_pt = 8,
+     &  n1x_pt = 12, n1y_pt = 6, n1z_pt = 4,
+     &  n2x_pt = 12, n2y_pt = 6, n2z_pt = 4,
+     &  nnx_pt = 8, nny_pt = 6, nnz_pt = 8,
 
 c Arの初期配置
 c nx_ar: x方向に並べるAr粒子の個数
 c ny_ar: y方向に並べるAr粒子の個数
 c nz_ar: z方向に並べるAr粒子の個数
 
-     &  nx_ar = 14, ny_ar = 7, nz_ar = 20,
+     &  nx_ar = 8, ny_ar = 5, nz_ar = 20,
 
 c ptkosi3: Ptの格子定数
 c arkosi3: Arの格子定数
@@ -39,12 +39,12 @@ c nhos_nano : ナノ構造の1層分のPt粒子の個数
 c nkoss1: Pt粒子の個数
 c nkoss2: Ar粒子の個数
      &  nkoss_pt_flat = n1x_pt*n1y_pt*n1z_pt,
-     &  nkoss_pt_nano = 2*nnx_pt*nny_pt*nnz_pt,
+     &  nkoss_pt_nano = nnx_pt*nny_pt*nnz_pt,
      &  nkoss_pt_bot = nkoss_pt_flat+nkoss_pt_nano,
      &  nhos = n1x_pt*n1y_pt,
      &  nhos_nanoxy = nnx_pt*nny_pt,
      &  nhos_nanoyz = nny_pt*nnz_pt,
-     &  nkoss_pt = 2*nkoss_pt_flat+2*nnx_pt*nny_pt*nnz_pt,
+     &  nkoss_pt = 2*nkoss_pt_flat+nnx_pt*nny_pt*nnz_pt,
      &  nkoss_ar = nx_ar*ny_ar*nz_ar,
 	 
      &  wallbot = ptkosi3*dble(n1z_pt)/2.0D0,    !固体壁のz方向長さ
