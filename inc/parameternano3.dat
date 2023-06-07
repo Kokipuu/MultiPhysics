@@ -1,0 +1,164 @@
+
+! parameter.dat
+
+      parameter(
+!!!!!!!!!!!!!粒子の個数について!!!!!!!!!!!!!!!
+! Pt分子の初期配置
+! n1x_pt: 下壁面のx方向に並べるPt粒子の個数
+! n1y_pt: 下壁面のy方向に並べるPt粒子の個数
+! n1z_pt: 下壁面のz方向に並べるPt粒子の個数
+! n2x_pt: 上壁面のx方向に並べるPt粒子の個数
+! n2y_pt: 上壁面のy方向に並べるPt粒子の個数
+! n2z_pt: 上壁面のz方向に並べるPt粒子の個数
+! nnx_pt: ナノ構造部分のx方向に並べるPt粒子の個数
+! nny_pt: ナノ構造部分のy方向に並べるPt粒子の個数
+! nnz_pt: ナノ構造部分のz方向に並べるPt粒子の個数
+
+     &  n1x_pt = 20, n1y_pt = 10, n1z_pt = 4,
+     &  n2x_pt = 20, n2y_pt = 10, n2z_pt = 4,
+     &  nnx_pt = 5, nny_pt = 10, nnz_pt = 8,
+
+c Arの初期配置
+c nx_ar: x方向に並べるAr粒子の個数
+c ny_ar: y方向に並べるAr粒子の個数
+c nz_ar: z方向に並べるAr粒子の個数
+
+     &  nx_ar = 14, ny_ar = 7, nz_ar = 20,
+
+c ptkosi3: Ptの格子定数
+c arkosi3: Arの格子定数
+
+     &  ptkosi3 = 3.9231D0, 
+     &  arkosi3 = 5.34D0,
+
+c nkoss_pt_flat: 下平滑面のPt粒子の個数
+c nkoss_pt_nano: 下壁面のナノ構造のPt粒子の個数
+c nkoss_pt_bot : 下壁面のPt粒子の個数の総和
+c nhos: 壁面固定層
+c nhos_nano : ナノ構造の1層分のPt粒子の個数
+c nkoss1: Pt粒子の個数
+c nkoss2: Ar粒子の個数
+     &  nkoss_pt_flat = n1x_pt*n1y_pt*n1z_pt,
+     &  nkoss_pt_nano = 2*nnx_pt*nny_pt*nnz_pt,
+     &  nkoss_pt_bot = nkoss_pt_flat+nkoss_pt_nano,
+     &  nhos = n1x_pt*n1y_pt,
+     &  nhos_nanoxy = nnx_pt*nny_pt,
+     &  nhos_nanoyz = nny_pt*nnz_pt,
+     &  nkoss_pt = 2*nkoss_pt_flat+2*nnx_pt*nny_pt*nnz_pt,
+     &  nkoss_ar = nx_ar*ny_ar*nz_ar,
+	 
+     &  wallbot = ptkosi3*dble(n1z_pt)/2.0D0,    !固体壁のz方向長さ
+     &  x_plate = ptkosi3*dble(n1x_pt)/2.0D0,    !平板のx方向長さ
+
+**********************************************************
+*****物質のパラメータ*****
+c bunsi_pt: Pt分子の質量
+c bunsi_ar: Ar分子の質量
+
+     &  bunsi_pt = 195.084D-3,
+     &	bunsi_ar = 39.948D-3,
+
+c dens_pt : バルクの固体密度(kg/m^3)
+     &  dens_pt = 21.4D3,
+c sigpp: Pt分子同士のLennard-Jonesパラメータσ(無次元)
+c epspp: Pt分子同士のLennard-Jonesパラメータε(無次元)
+c sigap: Ar分子とPt分子間のLennard-Jonesパラメータσ(無次元)
+c epsap: Ar分子とPt分子間のLennard-Jonesパラメータε(無次元)
+c sigaa: Aｒ分子同士のLennard-Jonesパラメータσ(無次元)
+c epsaa: Ar分子同士のLennard-Jonesパラメータε(無次元)
+     
+     &  sigpp = 2.54D0, epspp = 109.2D-5,
+     &  sigap = 2.97D0, epsap = 13.5D-5,
+     &  sigaa = 3.40D0, epsaa = 1.67D-5,
+
+c debye: Ptのデバイ温度(K)
+
+     &  debye = 240D0,
+
+***********************************************************
+*****系の大きさ*******
+c xsyu10: x方向の周期境界長さ(無次元)
+c ysyu10: y方向の周期境界長さ(無次元)
+c zsyu10: z方向の長さ(無次元)
+     &  xsyul0 =  ptkosi3*dble(n1x_pt)/2.0D0,
+     &  ysyul0 =  ptkosi3*dble(n1y_pt),
+     &  zsyul0 =  90.0D0,
+
+     &  surface = ptkosi3*dble(nny_pt)*ptkosi3/2.0D0*dble(nnz_pt),
+*******************************************************************
+*****計算パラメータ********
+c alpha_bot: 底面と流体粒子間での相互作用パラメータ
+c alpha_top: 上面と流体粒子間での相互作用パラメータ
+
+     &  alpha_bot = 0.04D0,
+     &  alpha_top = 0.04D0,
+	 
+c atemp1: Ptの目標温度
+c atemp2: Arの目標温度
+c cutoff33 カットオフ長さ/σ
+     
+     &  atemp_pt_bot = 80D0, atemp_pt_top = 130D0,
+     &  atemp_ar = 105D0,
+     &  cutoff33 = 3.00D0,
+	 
+c safe: bookkeepの安全率 
+     &  safe = 1.20D0,
+	 
+c avoga: アボガドロ数
+c boltz: ボルツマン定数
+c planck: プランク定数
+     &  avoga = 6.022D+23, boltz = 1.3806662D-23,
+     &  planck = 6.626093D-34,
+	 
+c pi: 円周率
+     &  pi = 3.141592654D0,
+	 
+c dt: 無次元時間ステップ
+     &  dt = 2.0D0,
+
+c ndzd,ndzl : スラブの分割数
+     &  ndzd = 1000D0,
+     &  ndzt = 20D0,
+	 
+c nc_x_in2d,nc_z_in2d : 二次元密度分布を作成する際のメッシュの数
+     &  ndx =16, ndz = 20,
+	 
+c int_q :　熱流を求める時間刻み
+     &  int_q = 50,
+	 
+	 
+*******************************************************************
+
+*******計算ステップ数のパラメータ*******
+c n_time_t: 計算開始時にAr粒子に温制御をかける時間
+c maxstep: 仮計算終了ステップ
+c ns0 : 物理量の計測開始ステップ
+c dt_maxwell : マクスウェル分布の速度刻み
+c nstop : 本計算の終了時間
+
+     &  n_time_t = 250000,
+     &  maxstep = 2000,
+     &  nmaxwell = 200,
+     &  dt_maxwell = 5.0D0,
+     &  ns0 = 1250000,
+     &  nstop = 10000,
+*******************************************
+********アニメーション作成パラメータ***************
+
+     &  moltype = 1,
+     &  nmol = nkoss_pt+nkoss_ar,
+     &  ndat1= maxstep/1000,
+     &  ntime0=0,
+     &  ndt = 1,
+     &  nspt = 2,
+     &  nsar = 14,
+     &  no = 14,
+     &  ng = 2,
+     &  ng2 = 10
+     &  )
+
+
+
+
+
+	 

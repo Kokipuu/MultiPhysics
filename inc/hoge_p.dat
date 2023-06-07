@@ -1,0 +1,6 @@
+       parameter(
+     &  n1x_pt = 20, n1y_pt = 10, n1z_pt = 4,
+     &  n2x_pt = 20, n2y_pt = 10, n2z_pt = 4,
+     &  nnx_pt = 5, nny_pt = 10, nnz_pt = 8
+     &  )
+     
