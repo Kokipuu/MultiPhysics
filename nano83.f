@@ -2141,7 +2141,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         endif
 51      continue
 
-      q_bot = tot_q_bot*1.00D4/(xsyul0*ysyul0+4*surface)*(-1.0D0)
+      q_bot = tot_q_bot*1.00D4/(xsyul0*ysyul0+2*surface)*(-1.0D0)
       q_top = tot_q_top*1.00D4/(xsyul0*ysyul0)*(-1.0D0)
       if(mod(nowstp,1000).eq.0)then
       tnowtime = dble(nowstp)*dt*1.0D-6 !現在時刻(ns)
